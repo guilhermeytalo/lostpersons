@@ -4,9 +4,9 @@ import { HomeComponent } from './home.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    HomeComponent
   ],
   exports: [HomeComponent],
-  imports: [CommonModule],
+  imports: [CommonModule]
 })
 export class HomeModule {}

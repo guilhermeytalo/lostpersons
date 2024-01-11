@@ -1,4 +1,8 @@
 export interface Pessoas {
+  content: DadosPessoais[]
+}
+
+export interface DadosPessoais {
   id: number
   nome: string
   idade: number
