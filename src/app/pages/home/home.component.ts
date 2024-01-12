@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/app/services/api/api.service';
-import { Pessoas } from 'src/utils/types';
+import { DadosPessoais, Pessoas } from 'src/utils/types';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,10 @@ import { Pessoas } from 'src/utils/types';
 export class HomeComponent implements OnInit {
   people: Pessoas;
   loading: boolean = true;
+  searchText: string = '';
+  unknownPersonImage: string = '../../../assets/img/unknown-person.jpg';
+
+  filteredPeopleList: DadosPessoais[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageEvent: PageEvent = {
     pageIndex: 0,
@@ -57,12 +61,13 @@ export class HomeComponent implements OnInit {
   async getLostPersonData(event?: PageEvent) {
     console.log('tem?', event);
     try {
-      const response: Pessoas = await
-      this.apiService.getLostPersons(
+      this.loading = true;
+      const response: Pessoas = await this.apiService.getLostPersons(
         event?.pageIndex || this.pageEvent.pageIndex,
         event?.pageSize || this.pageEvent.pageSize
       );
       this.people = response;
+      this.filteredPeopleList = this.people.content;
       console.log(this.people);
       return this.people;
     } catch (error) {
@@ -71,5 +76,29 @@ export class HomeComponent implements OnInit {
     } finally {
       this.loading = false;
     }
+  }
+
+  filterResults(text: string) {
+    console.log(text);
+    if (!text || this.searchText) {
+      this.filteredPeopleList = this.people.content;
+      return;
+    }
+
+    this.filteredPeopleList = this.people.content.filter(
+      (person) =>
+        person?.nome.toLowerCase().includes(text.toLowerCase()) ||
+        person?.idade.toString().includes(text.toLowerCase()) ||
+        person?.sexo.toLowerCase().includes(text.toLowerCase())
+    );
+    console.log('filteredPeopleList?', this.filteredPeopleList);
+  }
+
+  hasPerson(person: DadosPessoais) {
+    return (
+      person &&
+      person.ultimaOcorrencia &&
+      person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO
+    );
   }
 }
