@@ -16,25 +16,22 @@
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 rounded overflow-hidden shadow-lg">
-        <mat-card *ngFor="let person of filteredPeopleList" class="card">
-          <img class="w-[220px] h-[220px] bg-cover" [src]="person.urlFoto || unknownPersonImage" alt="Person photo">
-          <mat-card-content>
-            <mat-card-title>{{formatString(person.nome)}}</mat-card-title>
-            <mat-chip-listbox>
-              <mat-chip-option>Idade: {{person.idade}}</mat-chip-option>
-              <mat-chip-option>Sexo: {{formatString(person.sexo)}}</mat-chip-option>
-            </mat-chip-listbox>
-            <!-- need implementation -->
-            <!-- <mat-card-actions class="share-content">
+    <mat-card *ngFor="let person of filteredPeopleList" class="card">
+      <img class="w-[220px] h-[220px] bg-cover" [src]="person.urlFoto || unknownPersonImage" alt="Person photo">
+      <mat-card-content>
+        <mat-card-title>{{formatString(person.nome)}}</mat-card-title>
+        <mat-chip-listbox>
+          <mat-chip-option>Idade: {{person.idade}}</mat-chip-option>
+          <mat-chip-option>Sexo: {{formatString(person.sexo)}}</mat-chip-option>
+        </mat-chip-listbox>
+        <!-- need implementation -->
+        <!-- <mat-card-actions class="share-content">
               <button class="rounded-lg">Compartilhar</button>
             </mat-card-actions> -->
-          </mat-card-content>
-        </mat-card>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <mat-paginator
-    [length]="people.totalElements"
-    [pageSize]="people.numberOfElements"
-    (page)="getLostPersonData($event)"
+  <mat-paginator [length]="people.totalElements" [pageSize]="people.numberOfElements" (page)="getLostPersonData($event)"
     aria-label="Select page"></mat-paginator>
 </div>

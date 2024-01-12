@@ -58,14 +58,12 @@ export class HomeComponent implements OnInit {
   }
 
   async getLostPersonData(event?: PageEvent) {
-    // debugger;
     try {
       this.loading = true;
       const response: Pessoas = await this.apiService.getLostPersons(
         event?.pageIndex || this.pageEvent.pageIndex,
         event?.pageSize || this.pageEvent.pageSize
       );
-      console.log(response);
       this.people = response;
       this.filteredPeopleList = this.people.content;
       return this.people;
@@ -89,8 +87,6 @@ export class HomeComponent implements OnInit {
         person?.idade.toString().includes(text.toLowerCase()) ||
         person?.sexo.toLowerCase().includes(text.toLowerCase())
     );
-
-    console.log(this.filteredPeopleList);
   }
 
   hasPerson(person: DadosPessoais) {
@@ -103,11 +99,11 @@ export class HomeComponent implements OnInit {
 
   formatString(inputString: string): string {
     let words = inputString.split(' ');
-    let formattedWords = words.map(word =>
-        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    let formattedWords = words.map(
+      (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     );
     let formattedString = formattedWords.join(' ');
 
     return formattedString;
-}
+  }
 }
