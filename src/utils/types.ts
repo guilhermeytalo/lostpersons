@@ -1,5 +1,15 @@
 export interface Pessoas {
   content: DadosPessoais[]
+  pageable: Pageable
+  totalPages: number
+  totalElements: number
+  last: boolean
+  numberOfElements: number
+  first: boolean
+  sort: Sort2
+  number: number
+  size: number
+  empty: boolean
 }
 
 export interface DadosPessoais {
@@ -25,4 +35,25 @@ export interface UltimaOcorrencia {
 export interface OcorrenciaEntrevDesapDto {
   informacao: string
   vestimentasDesaparecido: string
+}
+
+export interface Pageable {
+  sort: Sort
+  pageNumber: number
+  pageSize: number
+  offset: number
+  paged: boolean
+  unpaged: boolean
+}
+
+export interface Sort {
+  unsorted: boolean
+  sorted: boolean
+  empty: boolean
+}
+
+export interface Sort2 {
+  unsorted: boolean
+  sorted: boolean
+  empty: boolean
 }

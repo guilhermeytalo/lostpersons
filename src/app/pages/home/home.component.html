@@ -8,13 +8,13 @@
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 rounded overflow-hidden shadow-lg">
     <div *ngFor="let person of people.content">
       <mat-card class="example-card">
-        <img class="w-[220px] h-[220px] bg-cover" [src]="person.urlFoto" alt="Person photo">
+        <!-- <img class="w-[220px] h-[220px] bg-cover" [src]="person.urlFoto" alt="Person photo"> -->
         <mat-card-content>
           <mat-card-title>{{person.nome}}</mat-card-title>
           <p class="text-gray-700 text-base">
-          {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao}} A mesma utilizava um(a)
-          {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido.toLowerCase()}}.
-        </p>
+            {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao}} A mesma utilizava um(a)
+            {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido.toLowerCase()}}.
+          </p>
         </mat-card-content>
         <mat-chip-listbox>
           <mat-chip-option>Idade: {{person.idade}}</mat-chip-option>
@@ -27,4 +27,8 @@
       </mat-card>
     </div>
   </div>
+
+  <mat-paginator [length]="people.totalElements" [pageSize]="people.size" [pageIndex]="people.number"
+    [pageSizeOptions]="[10, 50, 100]" (page)="getLostPersonData($event)" aria-label="Select page"></mat-paginator>
+
 </div>

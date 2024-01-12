@@ -15,10 +15,12 @@ export class ApiService {
   }
 
   /** Get Lost Persons */
-  async getLostPersons() {
+  async getLostPersons(pageIndex: number = 0, pageSize: number = 12) {
     return new Promise<Pessoas>((resolve, reject) => {
       this.http
-        .get<Pessoas>(`${environment.baserUrl}/filtro?status=DESAPARECIDO`)
+        .get<Pessoas>(
+          `${environment.baserUrl}/filtro?porPagina=${pageSize}&status=DESAPARECIDO&pagina=${pageIndex}`
+        )
         .subscribe({
           next: (response) => {
             this.reponseData = response;

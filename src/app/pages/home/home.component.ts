@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Pessoas } from 'src/utils/types';
 
@@ -9,6 +10,9 @@ import { Pessoas } from 'src/utils/types';
 })
 export class HomeComponent implements OnInit {
   people: Pessoas;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  pageEvent: PageEvent;
+
   constructor(private apiService: ApiService) {
     this.people = {
       content: [],
@@ -19,9 +23,10 @@ export class HomeComponent implements OnInit {
     this.getLostPersonData();
   }
 
-  async getLostPersonData() {
+  async getLostPersonData(event?: PageEvent) {
     try {
-      const response: Pessoas = await this.apiService.getLostPersons();
+      const response: Pessoas = await
+      this.apiService.getLostPersons(event?.pageIndex, event?.pageSize);
       this.people = response;
       console.log(this.people);
       return this.people;
