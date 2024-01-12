@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DadosPessoais, Pessoas } from 'src/utils/types';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -59,12 +58,14 @@ export class HomeComponent implements OnInit {
   }
 
   async getLostPersonData(event?: PageEvent) {
+    // debugger;
     try {
       this.loading = true;
       const response: Pessoas = await this.apiService.getLostPersons(
         event?.pageIndex || this.pageEvent.pageIndex,
         event?.pageSize || this.pageEvent.pageSize
       );
+      console.log(response);
       this.people = response;
       this.filteredPeopleList = this.people.content;
       return this.people;
@@ -88,6 +89,8 @@ export class HomeComponent implements OnInit {
         person?.idade.toString().includes(text.toLowerCase()) ||
         person?.sexo.toLowerCase().includes(text.toLowerCase())
     );
+
+    console.log(this.filteredPeopleList);
   }
 
   hasPerson(person: DadosPessoais) {
@@ -97,4 +100,14 @@ export class HomeComponent implements OnInit {
       person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO
     );
   }
+
+  formatString(inputString: string): string {
+    let words = inputString.split(' ');
+    let formattedWords = words.map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    );
+    let formattedString = formattedWords.join(' ');
+
+    return formattedString;
+}
 }
