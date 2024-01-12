@@ -1,4 +1,8 @@
-<div>
+<div *ngIf="loading" class="flex justify-center items-center h-screen">
+  <mat-spinner class="spinner" diameter="100" strokeWidth="10"></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
   <div>
     <h1 class="text-center text-3xl font-bold">
       Pessoas desaparecidas
@@ -34,5 +38,5 @@
     [pageSize]="people.size"
     [pageIndex]="people.totalPages"
     (page)="getLostPersonData($event)"
-    aria-label="Select page" />
+    aria-label="Select page"></mat-paginator>
 </div>

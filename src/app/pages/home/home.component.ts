@@ -10,6 +10,7 @@ import { Pessoas } from 'src/utils/types';
 })
 export class HomeComponent implements OnInit {
   people: Pessoas;
+  loading: boolean = true;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   pageEvent: PageEvent = {
     pageIndex: 0,
@@ -67,6 +68,8 @@ export class HomeComponent implements OnInit {
     } catch (error) {
       console.error(error);
       throw error;
+    } finally {
+      this.loading = false;
     }
   }
 }
