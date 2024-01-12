@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Pessoas } from 'src/utils/types';
-import { lastValueFrom } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  reponseData: any;
-
+  reponseData: Pessoas;
   constructor(private http: HttpClient) {
     this.reponseData = {
       content: [],
@@ -17,10 +16,19 @@ export class ApiService {
 
   /** Get Lost Persons */
   async getLostPersons() {
-    const data = this.http.get<Pessoas>(
-      `${environment.baserUrl}/filtro?status=DESAPARECIDO`
-    );
-    this.reponseData = await lastValueFrom(data);
-    return this.reponseData;
+    return new Promise<Pessoas>((resolve, reject) => {
+      this.http
+        .get<Pessoas>(`${environment.baserUrl}/filtro?status=DESAPARECIDO`)
+        .subscribe({
+          next: (response) => {
+            this.reponseData = response;
+            resolve(this.reponseData);
+          },
+          error: (error) => {
+            console.error(error);
+            reject(error);
+          },
+        });
+    });
   }
 }

@@ -5,32 +5,26 @@
     </h1>
   </div>
 
-  <!-- <div *ngFor="let person of people.content">
-    <div>
-
-      <h2>{{person.nome}}</h2>
-      <p>Id: {{person.id}}</p>
-      <p>Age: {{person.idade}}</p>
-      <p>Sex: {{person.sexo}}</p>
-      <p>Alive: {{person.vivo}}</p>
-      <img [src]="person.urlFoto" alt="Person photo">
-      <p>Last Occurrence: {{person.ultimaOcorrencia.dtDesaparecimento}}</p>
-    </div>
-  </div> -->
-
-
-  <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <img class="w-full" src="/assets/img/card-top.jpg" alt="Sunset in the mountains">
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-      <p class="text-gray-700 text-base">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-      </p>
-    </div>
-    <div class="px-6 pt-4 pb-2">
-      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 rounded overflow-hidden shadow-lg">
+    <div *ngFor="let person of people.content">
+      <mat-card class="example-card">
+        <img class="w-[220px] h-[220px] bg-cover" [src]="person.urlFoto" alt="Person photo">
+        <mat-card-content>
+          <mat-card-title>{{person.nome}}</mat-card-title>
+          <p class="text-gray-700 text-base">
+          {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.informacao}} A mesma utilizava um(a)
+          {{person.ultimaOcorrencia.ocorrenciaEntrevDesapDTO.vestimentasDesaparecido.toLowerCase()}}.
+        </p>
+        </mat-card-content>
+        <mat-chip-listbox>
+          <mat-chip-option>Idade: {{person.idade}}</mat-chip-option>
+          <mat-chip-option>Sexo: {{person.sexo}}</mat-chip-option>
+          <mat-chip-option>Ult. Local: {{person.ultimaOcorrencia.localDesaparecimentoConcat}}</mat-chip-option>
+        </mat-chip-listbox>
+        <mat-card-actions>
+          <button class="border-solid">Compartilhar</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
