@@ -18,4 +18,4 @@ Para startar o projeto `ng serve` e ele usará a porta `http://localhost:4200/`.
 	- [x] Searchbar permite ao usuário filtrar a lista de pessoas desaparecidas por nome, idade e sexo(baseado na página).
   - [ ] Ao clicar em um item da lista, o usuário deve ser redirecionado para uma página de detalhes que exibe informações detalhadas da pessoa desaparecida.
   - [ ] Possibilitar o compartilhamento dessa informação com mídias sociais como Facebook, Instagram, Whatsapp e outras que julgar oportuno.
-  - [ ] Criar aplicação em deploy no Netlify
+  - [x] Criar aplicação em deploy no Netlify
