@@ -59,7 +59,6 @@ export class HomeComponent implements OnInit {
   }
 
   async getLostPersonData(event?: PageEvent) {
-    console.log('tem?', event);
     try {
       this.loading = true;
       const response: Pessoas = await this.apiService.getLostPersons(
@@ -68,7 +67,6 @@ export class HomeComponent implements OnInit {
       );
       this.people = response;
       this.filteredPeopleList = this.people.content;
-      console.log(this.people);
       return this.people;
     } catch (error) {
       console.error(error);
@@ -79,7 +77,6 @@ export class HomeComponent implements OnInit {
   }
 
   filterResults(text: string) {
-    console.log(text);
     if (!text || this.searchText) {
       this.filteredPeopleList = this.people.content;
       return;
@@ -91,7 +88,6 @@ export class HomeComponent implements OnInit {
         person?.idade.toString().includes(text.toLowerCase()) ||
         person?.sexo.toLowerCase().includes(text.toLowerCase())
     );
-    console.log('filteredPeopleList?', this.filteredPeopleList);
   }
 
   hasPerson(person: DadosPessoais) {
