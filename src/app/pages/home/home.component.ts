@@ -11,7 +11,11 @@ import { Pessoas } from 'src/utils/types';
 export class HomeComponent implements OnInit {
   people: Pessoas;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  pageEvent: PageEvent;
+  pageEvent: PageEvent = {
+    pageIndex: 0,
+    pageSize: 12,
+    length: 0,
+  };
 
   constructor(private apiService: ApiService) {
     this.pageEvent = new PageEvent();
@@ -53,7 +57,10 @@ export class HomeComponent implements OnInit {
     console.log('tem?', event);
     try {
       const response: Pessoas = await
-      this.apiService.getLostPersons(event?.pageIndex, event?.pageSize);
+      this.apiService.getLostPersons(
+        event?.pageIndex || this.pageEvent.pageIndex,
+        event?.pageSize || this.pageEvent.pageSize
+      );
       this.people = response;
       console.log(this.people);
       return this.people;

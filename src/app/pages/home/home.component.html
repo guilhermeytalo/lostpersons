@@ -29,8 +29,10 @@
   </div>
 
   <mat-paginator
-    [length]="people.totalElements"
+    #paginator
+    [length]="people.size"
     [pageSize]="people.size"
-    [pageIndex]="people.number"
-    (page)="getLostPersonData($event)" aria-label="Select page" />
+    [pageIndex]="people.totalPages"
+    (page)="getLostPersonData($event)"
+    aria-label="Select page" />
 </div>
